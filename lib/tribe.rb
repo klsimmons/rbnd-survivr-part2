@@ -18,5 +18,6 @@ class Tribe
     if @immune_array[0].include?(@immune)
       @immune_array[0].pop
     end
+    puts "#{@immune_array.sample} is immune!"
   end
 end

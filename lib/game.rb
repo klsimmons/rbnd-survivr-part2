@@ -16,7 +16,7 @@ class Game
   end
 
   def immunity_challenge
-    @tribes.sample
+    puts "#{@tribes.sample} Tribe has won the challenge!"
   end
 
   def clear_tribes
