@@ -1,3 +1,5 @@
+require 'colorizr'
+
 class Contestant
   attr_reader :name
 
@@ -6,6 +8,6 @@ class Contestant
   end
 
   def to_s
-    @name
+    @name.green
   end
 end

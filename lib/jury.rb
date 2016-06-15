@@ -1,5 +1,5 @@
 class Jury
-  attr_writer :members
+  attr_writer :jury_members
 
   def initialize
     @jury_members = []

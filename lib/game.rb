@@ -1,10 +1,12 @@
 class Game
-  attr_writer :tribes
+  attr_writer :tribes, :immune
+  attr_reader :winning_tribe, :combined_tribe
 
   def initialize(tribe_one, tribe_two)
-    @tribe_one = Tribe.new( {name: @tribe_one, members: [] })
-    @tribe_two = Tribe.new( {name: @tribe_two, members: [] })
+    @coyopa = tribe_one
+    @hunapu = tribe_two
     @tribes = [tribe_one, tribe_two]
+
   end
 
   def tribes
@@ -16,7 +18,9 @@ class Game
   end
 
   def immunity_challenge
-    puts "#{@tribes.sample} Tribe has won the challenge!"
+    @winning_tribe = @tribes.sample
+    puts "#{@winning_tribe} won the immunity challenge!"
+    return @winning_tribe
   end
 
   def clear_tribes
@@ -25,18 +29,20 @@ class Game
 
 # Returns the array of members for the combined_tribe and individual_immunity_challenge
   def combined_members
-    combined_members = []
+    _combined_members = []
     @tribes.each do |tribe|
-      combined_members << tribe.members
+      _combined_members << tribe.members
     end
-    combined_members.flatten!
+    _combined_members.flatten!
   end
 
   def merge(combined_tribe)
-    @combined_tribe = Tribe.new(name: "New Merged Tribe", members: combined_members)
+    @combined_tribe = Tribe.new(name: combined_tribe, members: combined_members)
     end
 
   def individual_immunity_challenge
-    combined_members.sample
+    @immune = combined_members.sample
+    puts "#{@immune} won immunity"
+    return @immune
   end
 end

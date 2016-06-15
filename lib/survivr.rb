@@ -2,6 +2,7 @@ require_relative "game"
 require_relative "tribe"
 require_relative "contestant"
 require_relative "jury"
+require 'colorizr'
 
 #After your tests pass, uncomment this code below
 #=========================================================
@@ -19,22 +20,38 @@ require_relative "jury"
 
 
 #This is where you will write your code for the three phases
+
 def phase_one
+  puts "PHASE ONE".yellow
+
   8.times do
     @borneo.immunity_challenge
-    
+    if @coyopa == @borneo.winning_tribe
+      @hunapu.tribal_council(nil)
+    else
+      @coyopa.tribal_council(nil)
+    end
   end
+  puts "***MERGE***"
+
 end
 
+
 def phase_two
+  puts "PHASE TWO".yellow
+  puts @borneo.combined_tribe.members
   3.times do
-    @borneo.immunity_challenge
+    immune = @borneo.individual_immunity_challenge
+    @borneo.combined_tribe.tribal_council(immune)
   end
 end
 
 def phase_three
+  puts "PHASE THREE".yellow
   7.times do
-    @borneo.immunity_challenge
+    immune = @borneo.individual_immunity_challenge
+    loser = @borneo.combined_tribe.tribal_council(immune)
+    @jury.add_member(loser)
   end
 end
 
