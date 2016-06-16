@@ -5,6 +5,7 @@ class Contestant
 
   def initialize(name)
     @name = name
+    @colored_contestant = to_s.green
   end
 
   def to_s

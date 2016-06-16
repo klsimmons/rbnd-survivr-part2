@@ -10,8 +10,9 @@ class Tribe
     declare_tribe
   end
 
+
   def declare_tribe
-    puts "Playing for the #{self} Tribe are: #{list_members}"
+    puts "Playing for the " + "#{@name}".red + "Tribe are: #{list_members}"
   end
 
   def list_members
@@ -32,7 +33,7 @@ class Tribe
   end
 
   def print_loser
-    puts "#{@loser} is voted off. Remaining #{self} Tribe members are:"
+    puts "#{@loser} is voted off. Remaining #{@name.red} Tribe members are:"
     puts "#{list_members}"
   end
 end

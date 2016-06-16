@@ -40,14 +40,14 @@ end
 def phase_two
   announce_phase("two")
   3.times do
-    @borneo.loser_method
+    @borneo.complete_council_method
   end
 end
 
 def phase_three
   announce_phase("three")
   7.times do
-    loser = @borneo.loser_method
+    loser = @borneo.complete_council_method
     @jury.add_member(loser)
   end
 end

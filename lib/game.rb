@@ -19,7 +19,7 @@ class Game
 
   def immunity_challenge
     @winning_tribe = @tribes.sample
-    puts "#{@winning_tribe} won the immunity challenge!"
+    puts "#{@winning_tribe}".green + " won the immunity challenge!"
     return @winning_tribe
   end
 
@@ -59,7 +59,7 @@ class Game
   end
 
   # Avoids repetitious code in phases two and three of survivr.rb
-  def loser_method # RENAME
+  def complete_council_method 
     immune = individual_immunity_challenge
     loser = @combined_tribe.tribal_council(immune)
     @combined_tribe.print_loser
