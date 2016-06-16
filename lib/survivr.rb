@@ -21,42 +21,33 @@ require 'colorizr'
 
 #This is where you will write your code for the three phases
 
+# Gives each phase a title and adds spaces for easier viewing
+def announce_phase(phase)
+  puts ""
+  puts "PHASE #{phase}:".upcase.yellow
+  puts ""
+end
+
 def phase_one
-  puts ""
-  puts "PHASE ONE".yellow
-  puts ""
+  announce_phase("one")
   8.times do
     @borneo.immunity_challenge
-    if @coyopa == @borneo.winning_tribe
-      @hunapu.tribal_council(nil)
-    else
-      @coyopa.tribal_council(nil)
-    end
+    @borneo.losing_tribe_elimination
   end
-  puts""
-  puts "***MERGE***"
-  puts ""
 end
 
 
 def phase_two
-  puts ""
-  puts "PHASE TWO".yellow
-  puts ""
-  
+  announce_phase("two")
   3.times do
-    immune = @borneo.individual_immunity_challenge
-    @borneo.combined_tribe.tribal_council(immune)
+    @borneo.loser_method
   end
 end
 
 def phase_three
-  puts ""
-  puts "PHASE THREE".yellow
-  puts ""
+  announce_phase("three")
   7.times do
-    immune = @borneo.individual_immunity_challenge
-    loser = @borneo.combined_tribe.tribal_council(immune)
+    loser = @borneo.loser_method
     @jury.add_member(loser)
   end
 end

@@ -23,6 +23,18 @@ class Game
     return @winning_tribe
   end
 
+
+  # The tribe that lost the challenge does the elimination
+  def losing_tribe_elimination
+    if @coyopa == @winning_tribe
+      @hunapu.tribal_council(nil)
+      @hunapu.print_loser
+    else
+      @coyopa.tribal_council(nil)
+      @coyopa.print_loser
+    end
+  end
+
   def clear_tribes
     @tribes = []
   end
@@ -44,5 +56,13 @@ class Game
     @immune = combined_members.sample
     puts "#{@immune} won immunity"
     return @immune
+  end
+
+  # Avoids repetitious code in phases two and three of survivr.rb
+  def loser_method # RENAME
+    immune = individual_immunity_challenge
+    loser = @combined_tribe.tribal_council(immune)
+    @combined_tribe.print_loser
+    return loser
   end
 end

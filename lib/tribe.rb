@@ -7,6 +7,10 @@ class Tribe
   def initialize(options={})
     @name = options[:name]
     @members = options[:members]
+    declare_tribe
+  end
+
+  def declare_tribe
     puts "Playing for the #{self} Tribe are: #{list_members}"
   end
 
@@ -15,17 +19,20 @@ class Tribe
   end
 
   def to_s
-    @name.red
+    @name
   end
 
   def tribal_council(immune)
     @immune = immune
     # Avoids eliminating immune member
-    eliminations = @members.reject { |member| member == @immune } # Avoids eliminating immune member
-    loser = eliminations.pop
-    @members.delete(loser)
-    puts "#{loser} is voted off. Remaining #{self} Tribe members are:"
+    eliminations = @members.reject { |member| member == @immune }
+    @loser = eliminations.pop
+    @members.delete(@loser)
+    return @loser
+  end
+
+  def print_loser
+    puts "#{@loser} is voted off. Remaining #{self} Tribe members are:"
     puts "#{list_members}"
-    return loser
   end
 end
