@@ -4,7 +4,7 @@ class Jury
   def initialize
     @jury_members = []
     @finalists = []
-    @finalists_hash = {}
+    @votes_hash = {}
   end
 
   def add_member(member)
@@ -15,18 +15,20 @@ class Jury
     @jury_members
   end
 
-  def cast_votes(finalists)
-    finalists.each { |finalist| @finalists_hash[finalist] = 0 } # fills out hash
-    7.times do
-      finalists.shuffle!
-      @finalists_hash[finalists[0]] += 1
-      puts finalists[0]
+  def cast_votes(finalists) #finalists = array of 2 members set in survivr.rb
+    @votes_hash = {}
+    finalists.each { |finalist| @votes_hash[finalist] = 0 }
+    @jury_members.each do |juror|
+      vote = finalists.sample
+      @votes_hash[vote] += 1
+      puts "#{juror} voted for #{vote}"
     end
-    return @finalists_hash
+    return @votes_hash
   end
 
   def report_votes(final_votes)
-    @finalists_hash.each { |k,v| puts "#{k}: #{v}"}
+    puts "And the final votes are:"
+    @votes_hash.each { |finalist, votes| puts "#{finalist} with #{votes} votes"}
   end
 
   def announce_winner(final_votes)

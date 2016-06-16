@@ -22,8 +22,9 @@ require 'colorizr'
 #This is where you will write your code for the three phases
 
 def phase_one
+  puts ""
   puts "PHASE ONE".yellow
-
+  puts ""
   8.times do
     @borneo.immunity_challenge
     if @coyopa == @borneo.winning_tribe
@@ -32,14 +33,17 @@ def phase_one
       @coyopa.tribal_council(nil)
     end
   end
+  puts""
   puts "***MERGE***"
-
+  puts ""
 end
 
 
 def phase_two
+  puts ""
   puts "PHASE TWO".yellow
-  puts @borneo.combined_tribe.members
+  puts ""
+  
   3.times do
     immune = @borneo.individual_immunity_challenge
     @borneo.combined_tribe.tribal_council(immune)
@@ -47,7 +51,9 @@ def phase_two
 end
 
 def phase_three
+  puts ""
   puts "PHASE THREE".yellow
+  puts ""
   7.times do
     immune = @borneo.individual_immunity_challenge
     loser = @borneo.combined_tribe.tribal_council(immune)

@@ -1,0 +1,17 @@
+GIT
+  remote: https://github.com/klsimmons/colorizr
+  revision: 8fb1670d351f2347ea4eeda693ea648b05aa6e34
+  specs:
+    colorizr (0.0.1)
+
+GEM
+  specs:
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  colorizr!
+
+BUNDLED WITH
+   1.12.5

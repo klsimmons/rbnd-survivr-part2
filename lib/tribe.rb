@@ -24,7 +24,7 @@ class Tribe
     eliminations = @members.reject { |member| member == @immune } # Avoids eliminating immune member
     loser = eliminations.pop
     @members.delete(loser)
-    puts "#{loser} is voted off. Remaining Tribe members are:"
+    puts "#{loser} is voted off. Remaining #{self} Tribe members are:"
     puts "#{list_members}"
     return loser
   end
