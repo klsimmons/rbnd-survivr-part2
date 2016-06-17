@@ -2,7 +2,6 @@ require 'colorizr'
 
 class Tribe
   attr_reader :name, :members
-  attr_accessor :immune
 
   def initialize(options={})
     @name = options[:name]
@@ -23,11 +22,10 @@ class Tribe
     @name
   end
 
-  def tribal_council(immune)
-    @immune = immune
+  def tribal_council(options = {})
     # Avoids eliminating immune member
-    eliminations = @members.reject { |member| member == @immune }
-    @loser = eliminations.pop
+    eliminations = @members.reject { |member| member.eql? options[:immune] }
+    @loser = eliminations.sample
     @members.delete(@loser)
     return @loser
   end

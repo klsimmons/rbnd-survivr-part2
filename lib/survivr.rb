@@ -32,7 +32,8 @@ def phase_one
   announce_phase("one")
   8.times do
     @borneo.immunity_challenge
-    @borneo.losing_tribe_elimination
+    @borneo.losing_tribe.tribal_council
+    @borneo.losing_tribe.print_loser
   end
 end
 

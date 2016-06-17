@@ -1,6 +1,6 @@
 class Game
-  attr_writer :tribes, :immune
-  attr_reader :winning_tribe, :combined_tribe
+  attr_writer :tribes, :immune, :member
+  attr_reader :combined_tribe, :losing_tribe
 
   def initialize(tribe_one, tribe_two)
     @coyopa = tribe_one
@@ -14,32 +14,20 @@ class Game
   end
 
   def add_tribe(tribe)
-    @tribes << Tribe.new({name: tribe, members: [] })
+    @tribes << tribe
   end
 
   def immunity_challenge
-    @winning_tribe = @tribes.sample
-    puts "#{@winning_tribe}".green + " won the immunity challenge!"
-    return @winning_tribe
-  end
-
-
-  # The tribe that lost the challenge does the elimination
-  def losing_tribe_elimination
-    if @coyopa == @winning_tribe
-      @hunapu.tribal_council(nil)
-      @hunapu.print_loser
-    else
-      @coyopa.tribal_council(nil)
-      @coyopa.print_loser
-    end
+    @losing_tribe = @tribes.sample
+    puts "#{@losing_tribe}".red + " has lost immunity challenge!"
+    return @losing_tribe
   end
 
   def clear_tribes
     @tribes = []
   end
 
-# Returns the array of members for the combined_tribe and individual_immunity_challenge
+# Returns the array of members for the combined_tribe
   def combined_members
     _combined_members = []
     @tribes.each do |tribe|
@@ -50,18 +38,21 @@ class Game
 
   def merge(combined_tribe)
     @combined_tribe = Tribe.new(name: combined_tribe, members: combined_members)
-    end
+  end
 
   def individual_immunity_challenge
-    @immune = combined_members.sample
+    # Checks if @combined_tribe has been created for cases where the test runs
+    # without calling the merge method
+    @combined_tribe = merge("merged") if @combined_tribe.nil?
+    @immune = @combined_tribe.members.sample
     puts "#{@immune} won immunity"
     return @immune
   end
 
   # Avoids repetitious code in phases two and three of survivr.rb
-  def complete_council_method 
+  def complete_council_method
     immune = individual_immunity_challenge
-    loser = @combined_tribe.tribal_council(immune)
+    loser = @combined_tribe.tribal_council(immune: immune)
     @combined_tribe.print_loser
     return loser
   end
